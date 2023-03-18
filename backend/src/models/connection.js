@@ -1,5 +1,6 @@
 // configura conexao com o banco de dados
 const mysql = require('mysql2/promise');
+require('dotenv').config();
 
 // cria uma lista de conexoes com o banco
 const connection = mysql.createPool({

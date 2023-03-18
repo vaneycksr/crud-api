@@ -22,3 +22,11 @@ Creating API with nodejs
 ## executando servidor sem precisar ficar reiniciando
 
 /backend$ npm run dev
+
+## conectando-se com o MYSQL
+
+1. baixar a imagem e executar em background
+
+-- docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql
+
+2. necessário criar o banco e a tabela no mysql na primeira vez
