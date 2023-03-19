@@ -1,3 +1,5 @@
+const connection = require('../models/connection');
+
 /**
  * necessario para validar dados
  */
@@ -28,12 +30,24 @@
         return res.status(400).json({message: 'status cannot be empty!'});
     }
 
-    // se nao entrou nos ifs eh porque esta ok, por isso o next, vai para o proximo middlware, ou proxima rota
     next();
+ };
 
+ const validateById = async (req,res,next) => {
+
+    const {id} = req.params;
+
+    const [limit] = await connection.execute('SELECT count(*) as totalTasks FROM tasks ')
+
+    if (id > limit[0].totalTasks) {
+        return res.status(404).json({message: 'Task not found'});
+    }
+
+    next();
  };
 
  module.exports = {
     validateFieldBody,
-    validateFieldStatus
+    validateFieldStatus,
+    validateById
  }

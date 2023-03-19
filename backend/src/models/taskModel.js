@@ -20,6 +20,13 @@ const getAll = async () => {
     return tasks;
 };
 
+const getById = async(id) => {
+
+    const [task] = await connection.execute('SELECT * FROM tasks WHERE id = ?', [id])
+
+    return task[0];
+};
+
 const createTask = async (task) => {
 
     const {title} = task;
@@ -39,7 +46,7 @@ const deleteTask = async (id) => {
     const [removedTask] = await connection.execute('DELETE FROM tasks WHERE id = ?',[id]);
 
     return removedTask;
-}
+};
 
 const updateTask = async (id, task) => {
 
@@ -50,12 +57,13 @@ const updateTask = async (id, task) => {
     const [updatedTask] = await connection.execute(query, [title, status, id]);
 
     return updatedTask;
-}
+};
 
 
 module.exports = {
     getAll,
     createTask,
     deleteTask,
-    updateTask
+    updateTask,
+    getById
 };
