@@ -44,3 +44,6 @@ Creating API with nodejs
     $ docker build -t <nome_da_imagem> .
 > executando a nova imagem
     $ docker run -p 3306:3306 --name meu_mysql -e MYSQL_ROOT_PASSWORD=<senha> -e MYSQL_DATABASE=<banco_de_dados> -d nome_da_imagem
+
+
+obs.: primeiro faz camada do model, depois o controller, por último cria a rota. Lembrete apenas para saber por onde começar a desenvolver

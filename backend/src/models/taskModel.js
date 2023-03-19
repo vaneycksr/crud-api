@@ -29,13 +29,21 @@ const createTask = async (task) => {
 
     const query = 'INSERT INTO tasks(title, status, created_at) VALUES (?,?,?)';
 
-    const [createdTask] = await connection.execute(query,[title,'pending',dateUTC]);
+    const [createdTask] = await connection.execute(query, [title, 'pending', dateUTC]);
 
     return {insertedId: createdTask.insertId};
 };
 
+const deleteTask = async (id) => {
+
+    const removedTask = await connection.execute('DELETE FROM tasks WHERE id = ?',[id]);
+
+    return removedTask;
+}
+
 
 module.exports = {
     getAll,
-    createTask
+    createTask,
+    deleteTask
 };
