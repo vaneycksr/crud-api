@@ -1,7 +1,7 @@
 /**
  * necessario para validar dados
  */
- const validateBody = (req,res,next) => {
+ const validateFieldBody = (req,res,next) => {
 
     const {body} = req;
 
@@ -17,6 +17,23 @@
 
  };
 
+ const validateFieldStatus = (req,res,next) => {
+
+    const {body} = req;
+
+    if (body.status === undefined) {
+        return res.status(400).json({message: 'The field "status" is required'});
+    }
+    if (body.status === '') {
+        return res.status(400).json({message: 'status cannot be empty!'});
+    }
+
+    // se nao entrou nos ifs eh porque esta ok, por isso o next, vai para o proximo middlware, ou proxima rota
+    next();
+
+ };
+
  module.exports = {
-    validateBody,
+    validateFieldBody,
+    validateFieldStatus
  }
